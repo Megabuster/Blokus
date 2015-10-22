@@ -1,10 +1,11 @@
-'use strict';
 
-angular.module('myApp', ['ngTouch', 'ui.bootstrap']).factory('gameLogic', function() {
+
+angular.module('myApp', ['ngTouch', 'ui.bootstrap', 'gameServices']).factory('gameLogic', function() {
+  'use strict';
 /**
  * Returns the initial Blokus board, which is a 20 * 20 matrix containing ''.
  */
- 
+
 
 function getInitialBoard() {
 //
@@ -52,7 +53,7 @@ function getInitialBoard() {
 }
 
 function getInitialFreeShapes() {
-	return [[true, true, true, true, true,true, true, true, true, true,true, true, true, true, true,true, true, true, true, true, true], 
+	return [[true, true, true, true, true,true, true, true, true, true,true, true, true, true, true,true, true, true, true, true, true],
 		    [true, true, true, true, true,true, true, true, true, true,true, true, true, true, true,true, true, true, true, true, true],
 		    [true, true, true, true, true,true, true, true, true, true,true, true, true, true, true,true, true, true, true, true, true],
 		    [true, true, true, true, true,true, true, true, true, true,true, true, true, true, true,true, true, true, true, true, true]];
@@ -82,7 +83,7 @@ function getPossibleMoves(state, turnIndex) {
 			if (squareEdgeConnected(board, i, j, turnIndex)) {
 				continue;
 			}
-			
+
 			for (var k = 0; k < shapeOf5Squares.length; k++) {
 				var shape = shapeOf5Squares[k];
 				if (!freeShapes[turnIndex][shape]) {
@@ -129,7 +130,7 @@ function traverseBoard(){
 	var i;
 	var j;
 	for (var level = 9; level >=0; level--) {
-		i = level; 
+		i = level;
 		j = level;
 		// going right;
 		for (; j < level + num; j++) {
@@ -284,19 +285,19 @@ function createMove(stateBeforeMove, placement, shape, turnIndexBeforeMove) {
 			freeShapesAfterMove, playerStatus);
 	var firstOperation = updateTurnIndex(turnIndexBeforeMove,
 			playerStatusAfterMove, freeShapesAfterMove);
-	return [ firstOperation, 
+	return [ firstOperation,
 	{set : {
 			key : 'board',
 			value : boardAfterMove
-		}}, 
+		}},
 	{set : {
 			key : 'playerStatus',
 			value : playerStatusAfterMove
-		}}, 
+		}},
 	{set : {
 			key : 'freeShapes',
 			value : freeShapesAfterMove
-		}}, 
+		}},
 	{set : {
 			key : 'delta',
 			value : {
@@ -311,7 +312,7 @@ function createMove(stateBeforeMove, placement, shape, turnIndexBeforeMove) {
 		{set : {
 			key : 'lastIndex',
 			value : tmpIndex
-		}} 
+		}}
 	];
 }
 
@@ -356,7 +357,7 @@ function canMove(board, freeShapes, turnIndex) {
 	if (isFirstMove(board, turnIndex)) {
 		return true;
 	}
-	
+
 	for (var i = 0; i < 20; i++) {
 		for (var j = 0; j < 20; j++) {
 			if (board[i][j] !== '') {
@@ -374,7 +375,7 @@ function canMove(board, freeShapes, turnIndex) {
 						continue;
 					}
 					var placement = getPlacement(i, j, shape, r);
-					if (placementInBound(board, placement) && !isOccupied(board, placement) && 
+					if (placementInBound(board, placement) && !isOccupied(board, placement) &&
 						!edgeConnected(board, placement, turnIndex) && cornerConnected(board, placement, turnIndex)) {
 						return true;
 					}
@@ -481,7 +482,7 @@ function getScore(freeShapes) {
 		}
 		console.log(score);
 	}
-	// If a player played all of his or her pieces, he or she gets a bonus score of +20 points 
+	// If a player played all of his or her pieces, he or she gets a bonus score of +20 points
 	return [score[0] + score[1], score[2] + score[3]];
 }
 
@@ -494,9 +495,9 @@ function inBounds(board, row, col) {
 /** check whether the board square has an edge connection to another square of the same player 03/22 */
 function squareCornerConnected(board, row, col, turnIndex) {
 	var label = turnIndex.toString();
-	if (inBounds(board, row + 1, col + 1) && board[row + 1][col + 1] === label || 
+	if (inBounds(board, row + 1, col + 1) && board[row + 1][col + 1] === label ||
 		inBounds(board, row + 1, col - 1) && board[row + 1][col - 1] === label ||
-		inBounds(board, row - 1, col + 1) && board[row - 1][col + 1] === label || 
+		inBounds(board, row - 1, col + 1) && board[row - 1][col + 1] === label ||
 		inBounds(board, row - 1, col - 1) && board[row - 1][col - 1] === label) {
 		return true;
 	} else {
@@ -519,9 +520,9 @@ function cornerConnected(board, placement, turnIndex) {
 /** check whether the board square has an edge connection to another square of the same player 03/22 */
 function squareEdgeConnected(board, row, col, turnIndex) {
 	var label = turnIndex.toString();
-	if (inBounds(board, row + 1, col) && board[row + 1][col] === label || 
+	if (inBounds(board, row + 1, col) && board[row + 1][col] === label ||
 		inBounds(board, row - 1, col) && board[row - 1][col] === label ||
-		inBounds(board, row, col + 1) && board[row][col + 1] === label || 
+		inBounds(board, row, col + 1) && board[row][col + 1] === label ||
 		inBounds(board, row, col - 1) && board[row][col - 1] === label) {
 		return true;
 	} else {
@@ -595,7 +596,7 @@ function legalPlacement(board, placement, turnIndex) {
 	*/
 	if (isFirstMove(board, turnIndex)) {
 		for (var i = 0; i < placement.length; i++) {
-			if (angular.equals(placement[i], [0,0]) || angular.equals(placement[i], [0,19]) || 
+			if (angular.equals(placement[i], [0,0]) || angular.equals(placement[i], [0,19]) ||
 				angular.equals(placement[i], [19,0]) || angular.equals(placement[i], [19,19])) {
 				return placementInBound(board, placement)
 						&& !isOccupied(board, placement);
@@ -964,19 +965,20 @@ function getPlacement(row, col, shape, r) {
 	  getPossibleMovesWithSqaureN: getPossibleMovesWithSqaureN,
 	  getInternalTurnIndex : getInternalTurnIndex
   };
-});;angular.module('myApp')
-  .controller('Ctrl', 
+});
+;angular.module('myApp')
+  .controller('Ctrl',
       ['$scope', '$rootScope', '$log', '$timeout',
        'gameService', 'gameLogic', 'resizeGameAreaService','dragAndDropService',
 		function ($scope,$rootScope, $log, $timeout,
 			gameService, gameLogic, resizeGameAreaService, dragAndDropService) {
 
     'use strict';
-		
+
 	/*set background color of boardArea square when dragging */
 	function setSquareBackgroundColor(row, col, color) {
 		document.getElementById('e2e_test_board_div_' + row + 'x' + col).style.background = color;
-		
+
 	}
 	/*set background color of boardArea when dragging*/
     function setBoardBackgroundColor() {
@@ -991,7 +993,7 @@ function getPlacement(row, col, shape, r) {
 	$scope.setBoardAreaSquareStyle = function(row, col) {
 		var color = getBoardSquareColor(row, col);
 		return {background:color};
-		
+
 	}
 	/*return the square color on the boardArea. Red, green, blue, yellow for player0, 1, 2, 3. Grey for empty board square*/
 	function getBoardSquareColor(row, col) {
@@ -1032,14 +1034,14 @@ function getPlacement(row, col, shape, r) {
 		var draggingLines = document.getElementById(dragType+"DraggingLines");
 		draggingLines.style.display = "none";
     }
-	
+
 	dragAndDropService.addDragListener("gameArea", handleDragEvent);
-	
+
 	function getAreaSize(type) {
 		var area = document.getElementById(type + "Area");
 		return {width:area.clientWidth, height:area.clientHeight};
 	}
-	
+
 	/*return true if the board square row X col is newly added, used for animation*/
 	$scope.newlyPlaced = function(row, col) {
 		/*for the initial state, there is no newly added square*/
@@ -1054,7 +1056,7 @@ function getPlacement(row, col, shape, r) {
 		}
 		return false;
 	}
-	
+
 	function handleDragEvent(type, clientX, clientY) {
 		var gameArea = document.getElementById("gameArea");
 		var boardArea = document.getElementById("boardArea");
@@ -1098,7 +1100,7 @@ function getPlacement(row, col, shape, r) {
 			y = shapeY;
 			dragType = 'shape';
 			clearDrag('rotate');
-		} 
+		}
 		// ignore if none of the valid drag
 		if (dragType === '') {
 			clearDrag('board');
@@ -1111,9 +1113,9 @@ function getPlacement(row, col, shape, r) {
 		var areaSize = getAreaSize(dragType);
 		var col = Math.floor(num.colsNum * x / areaSize.width);
 		var row = Math.floor(num.rowsNum * y / areaSize.height);
-	
+
 		if (dragType === 'board') {
-			// ignore the drag if the player didn't choose a shape; 
+			// ignore the drag if the player didn't choose a shape;
 			if ($scope.shape === -1) {
 				return;
 			}
@@ -1131,10 +1133,10 @@ function getPlacement(row, col, shape, r) {
 				setPlacementBackgroundColor(placement);
 				$scope.preview = placement;
 			}
-			
+
 		}
 
-		// displaying the dragging lines 
+		// displaying the dragging lines
 		var draggingLines = document.getElementById(dragType + "DraggingLines");
 		var horizontalDraggingLine = document.getElementById(dragType + "HorizontalDraggingLine");
 		var verticalDraggingLine = document.getElementById(dragType + "VerticalDraggingLine");
@@ -1145,7 +1147,7 @@ function getPlacement(row, col, shape, r) {
 		horizontalDraggingLine.setAttribute("y1", centerXY.y);
 		horizontalDraggingLine.setAttribute("y2", centerXY.y);
 		//var topLeft = getSquareTopLeft(row, col, dragType);
-		
+
 		if (type === "touchend" || type === "touchcancel" || type === "touchleave" || type === "mouseup") {
 			// drag ended
 			dragDone(row, col, dragType);
@@ -1155,13 +1157,13 @@ function getPlacement(row, col, shape, r) {
 	function getRowColNum(type) {
 		if (type === 'board') {
 			return {rowsNum: 20, colsNum: 20};
-		} 
+		}
 		if (type === 'shape') {
 			return {rowsNum: 12, colsNum: 20};
-		} 
+		}
 		if (type === 'rotate') {
 			return {rowsNum: 12, colsNum: 20};
-		} 
+		}
 	}
 	function getSquareWidthHeight(type) {
 		var size = getAreaSize(type);
@@ -1199,9 +1201,9 @@ function getPlacement(row, col, shape, r) {
 			}
         });
     }
-	
+
 	//window.e2e_test_stateService = stateService; //to allow us to load any state in our e2e tests.
-	
+
 	// Before getting any updateUI, we initialize $scope variables (such as board)
     // and show an empty board to a viewer (so you can't perform moves).
     // updateUI({stateAfterMove: {}, turnIndexAfterMove: 0, yourPlayerIndex: -2}); this is a fake call;
@@ -1234,7 +1236,7 @@ function getPlacement(row, col, shape, r) {
 			params.yourPlayerIndex === params.turnIndexAfterMove; // it's my turn
 		$scope.turnIndex = params.turnIndexAfterMove;
 		$scope.internalTurnIndex = gameLogic.getInternalTurnIndex();	// initialize internal turn index
-		// Is it the computer's turn?	
+		// Is it the computer's turn?
 		if ($scope.isYourTurn &&
 			params.playersInfo[params.yourPlayerIndex].playerId === '') {
 			$scope.isYourTurn = false; // to make sure the UI won't send another move.
@@ -1443,7 +1445,7 @@ function getPlacement(row, col, shape, r) {
 		if($scope.shape === 13) {
 			if(row===1&&col>=1&&col<=3 || row===0&&col===3 || row===2&&col===1) {
 				rotate = 0;
-			} 
+			}
 			if(row>=0&&row<=2&&col===7 || row===0&&col===6 || row===2&&col===8) {
 				rotate = 1;
 			}
@@ -1463,7 +1465,7 @@ function getPlacement(row, col, shape, r) {
 			}
 			if(row===0&&col>=11&&col<=13 || row===1&&col===12) {
 				rotate = 2;
-			} 
+			}
 			if(row>=0&&row<=2&&col===18 || row===1&&col===17) {
 				rotate = 3;
 			}
@@ -1581,14 +1583,14 @@ function getPlacement(row, col, shape, r) {
 		}
 		return rotate;
 	}
-	
+
 	$scope.rotateAreaCellClicked = function(row, col) {
 		var rotate = $scope.getRotate(row,col);
 		if (rotate >= 0) {
 			$scope.rotate = rotate; // if the player clicks on a legal rotation, store the rotation in $scope.rotate
 		}
 	}
-		
+
 	$scope.boardAreaCellClicked = function (row, col) {
 		$log.info(["Clicked on cell:", row, col]);
 		if (window.location.search === '?throwException') { // to test encoding a stack trace with sourcemap
@@ -1644,7 +1646,7 @@ function getPlacement(row, col, shape, r) {
 	$scope.getShape = function(row, col) {
       if (row === 0 && col === 4) {
         return 0;
-      } 
+      }
       if (col === 0 && (row === 3 || row === 4)) {
         return 1;
       }
@@ -1707,5 +1709,5 @@ function getPlacement(row, col, shape, r) {
       }
       return -1;
     };
-	
+
   }]);

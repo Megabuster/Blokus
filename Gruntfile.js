@@ -5,6 +5,13 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js',
+        background: true,
+        singleRun: false
+      }
+    },
     watch: {
       files: ['src/*.js'],
       tasks: []
@@ -15,7 +22,7 @@ module.exports = function(grunt) {
       },
     dist: {
         // Order is important! gameLogic.js must be first because it defines myApp angular module.
-        src: ['src/gameLogic.js', 'src/game.js'],
+        src: ['src/gameLogic.js', 'src/game.js', 'src/aiService.js'],
         dest: 'dist/everything.js',
       },
              },
@@ -51,17 +58,42 @@ module.exports = function(grunt) {
             'http://yoav-zibin.github.io/emulator/main.css',
             'dist/everything.min.js',
             'game.css',
-            'languages/en.js',
-            'languages/zh.js',
+            'languages/en.js'
           ],
-          network: ['dist/everything.min.js.map', 'dist/everything.js'],
+          network: ['dist/everything.min.js.map', 'dist/everything.js', 'languages/zh.js',],
           timestamp: true
         },
         dest: 'game.appcache',
         src: []
       }
     },
-    });
+    'http-server': {
+    'dev': {
+        // the server root directory
+        root: '.',
+        port: 9000,
+        host: "0.0.0.0",
+        cache: 1,
+        showDir : true,
+        autoIndex: true,
+        // server default file extension
+        ext: "html",
+        // run in parallel with other tasks
+        runInBackground: true
+    }
+},
+protractor: {
+  options: {
+    configFile: "protractor.conf.js", // Default config file
+    keepAlive: true, // If false, the grunt process stops when the test fails.
+    noColor: false, // If true, protractor will not use colors in its output.
+    args: {
+      // Arguments passed to the command
+    }
+  },
+  all: {}
+},
+});
 
 
 
@@ -73,10 +105,10 @@ module.exports = function(grunt) {
 //  grunt.loadNpmTasks('grunt-protractor-runner');
 
   // Default task(s).
-  grunt.registerTask('default', [
+  grunt.registerTask('default', [ 
       'concat', 'uglify',
-      'processhtml', 'manifest'//,
-      //'http-server', 'protractor'
+      'processhtml', 'manifest',
+      'http-server', 'protractor'
       ]);
 
 };

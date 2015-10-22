@@ -1,10 +1,11 @@
-'use strict';
 
-angular.module('myApp', ['ngTouch', 'ui.bootstrap']).factory('gameLogic', function() {
+
+angular.module('myApp', ['ngTouch', 'ui.bootstrap', 'gameServices']).factory('gameLogic', function() {
+  'use strict';
 /**
  * Returns the initial Blokus board, which is a 20 * 20 matrix containing ''.
  */
- 
+
 
 function getInitialBoard() {
 //
@@ -52,7 +53,7 @@ function getInitialBoard() {
 }
 
 function getInitialFreeShapes() {
-	return [[true, true, true, true, true,true, true, true, true, true,true, true, true, true, true,true, true, true, true, true, true], 
+	return [[true, true, true, true, true,true, true, true, true, true,true, true, true, true, true,true, true, true, true, true, true],
 		    [true, true, true, true, true,true, true, true, true, true,true, true, true, true, true,true, true, true, true, true, true],
 		    [true, true, true, true, true,true, true, true, true, true,true, true, true, true, true,true, true, true, true, true, true],
 		    [true, true, true, true, true,true, true, true, true, true,true, true, true, true, true,true, true, true, true, true, true]];
@@ -82,7 +83,7 @@ function getPossibleMoves(state, turnIndex) {
 			if (squareEdgeConnected(board, i, j, turnIndex)) {
 				continue;
 			}
-			
+
 			for (var k = 0; k < shapeOf5Squares.length; k++) {
 				var shape = shapeOf5Squares[k];
 				if (!freeShapes[turnIndex][shape]) {
@@ -129,7 +130,7 @@ function traverseBoard(){
 	var i;
 	var j;
 	for (var level = 9; level >=0; level--) {
-		i = level; 
+		i = level;
 		j = level;
 		// going right;
 		for (; j < level + num; j++) {
@@ -284,19 +285,19 @@ function createMove(stateBeforeMove, placement, shape, turnIndexBeforeMove) {
 			freeShapesAfterMove, playerStatus);
 	var firstOperation = updateTurnIndex(turnIndexBeforeMove,
 			playerStatusAfterMove, freeShapesAfterMove);
-	return [ firstOperation, 
+	return [ firstOperation,
 	{set : {
 			key : 'board',
 			value : boardAfterMove
-		}}, 
+		}},
 	{set : {
 			key : 'playerStatus',
 			value : playerStatusAfterMove
-		}}, 
+		}},
 	{set : {
 			key : 'freeShapes',
 			value : freeShapesAfterMove
-		}}, 
+		}},
 	{set : {
 			key : 'delta',
 			value : {
@@ -311,7 +312,7 @@ function createMove(stateBeforeMove, placement, shape, turnIndexBeforeMove) {
 		{set : {
 			key : 'lastIndex',
 			value : tmpIndex
-		}} 
+		}}
 	];
 }
 
@@ -356,7 +357,7 @@ function canMove(board, freeShapes, turnIndex) {
 	if (isFirstMove(board, turnIndex)) {
 		return true;
 	}
-	
+
 	for (var i = 0; i < 20; i++) {
 		for (var j = 0; j < 20; j++) {
 			if (board[i][j] !== '') {
@@ -374,7 +375,7 @@ function canMove(board, freeShapes, turnIndex) {
 						continue;
 					}
 					var placement = getPlacement(i, j, shape, r);
-					if (placementInBound(board, placement) && !isOccupied(board, placement) && 
+					if (placementInBound(board, placement) && !isOccupied(board, placement) &&
 						!edgeConnected(board, placement, turnIndex) && cornerConnected(board, placement, turnIndex)) {
 						return true;
 					}
@@ -481,7 +482,7 @@ function getScore(freeShapes) {
 		}
 		console.log(score);
 	}
-	// If a player played all of his or her pieces, he or she gets a bonus score of +20 points 
+	// If a player played all of his or her pieces, he or she gets a bonus score of +20 points
 	return [score[0] + score[1], score[2] + score[3]];
 }
 
@@ -494,9 +495,9 @@ function inBounds(board, row, col) {
 /** check whether the board square has an edge connection to another square of the same player 03/22 */
 function squareCornerConnected(board, row, col, turnIndex) {
 	var label = turnIndex.toString();
-	if (inBounds(board, row + 1, col + 1) && board[row + 1][col + 1] === label || 
+	if (inBounds(board, row + 1, col + 1) && board[row + 1][col + 1] === label ||
 		inBounds(board, row + 1, col - 1) && board[row + 1][col - 1] === label ||
-		inBounds(board, row - 1, col + 1) && board[row - 1][col + 1] === label || 
+		inBounds(board, row - 1, col + 1) && board[row - 1][col + 1] === label ||
 		inBounds(board, row - 1, col - 1) && board[row - 1][col - 1] === label) {
 		return true;
 	} else {
@@ -519,9 +520,9 @@ function cornerConnected(board, placement, turnIndex) {
 /** check whether the board square has an edge connection to another square of the same player 03/22 */
 function squareEdgeConnected(board, row, col, turnIndex) {
 	var label = turnIndex.toString();
-	if (inBounds(board, row + 1, col) && board[row + 1][col] === label || 
+	if (inBounds(board, row + 1, col) && board[row + 1][col] === label ||
 		inBounds(board, row - 1, col) && board[row - 1][col] === label ||
-		inBounds(board, row, col + 1) && board[row][col + 1] === label || 
+		inBounds(board, row, col + 1) && board[row][col + 1] === label ||
 		inBounds(board, row, col - 1) && board[row][col - 1] === label) {
 		return true;
 	} else {
@@ -595,7 +596,7 @@ function legalPlacement(board, placement, turnIndex) {
 	*/
 	if (isFirstMove(board, turnIndex)) {
 		for (var i = 0; i < placement.length; i++) {
-			if (angular.equals(placement[i], [0,0]) || angular.equals(placement[i], [0,19]) || 
+			if (angular.equals(placement[i], [0,0]) || angular.equals(placement[i], [0,19]) ||
 				angular.equals(placement[i], [19,0]) || angular.equals(placement[i], [19,19])) {
 				return placementInBound(board, placement)
 						&& !isOccupied(board, placement);

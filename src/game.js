@@ -1,16 +1,16 @@
 angular.module('myApp')
-  .controller('Ctrl', 
+  .controller('Ctrl',
       ['$scope', '$rootScope', '$log', '$timeout',
-       'gameService', 'gameLogic', 'resizeGameAreaService','dragAndDropService',
+        'gameLogic',
 		function ($scope,$rootScope, $log, $timeout,
-			gameService, gameLogic, resizeGameAreaService, dragAndDropService) {
+		gameLogic) {
 
     'use strict';
-		
+
 	/*set background color of boardArea square when dragging */
 	function setSquareBackgroundColor(row, col, color) {
 		document.getElementById('e2e_test_board_div_' + row + 'x' + col).style.background = color;
-		
+
 	}
 	/*set background color of boardArea when dragging*/
     function setBoardBackgroundColor() {
@@ -25,7 +25,7 @@ angular.module('myApp')
 	$scope.setBoardAreaSquareStyle = function(row, col) {
 		var color = getBoardSquareColor(row, col);
 		return {background:color};
-		
+
 	}
 	/*return the square color on the boardArea. Red, green, blue, yellow for player0, 1, 2, 3. Grey for empty board square*/
 	function getBoardSquareColor(row, col) {
@@ -66,14 +66,14 @@ angular.module('myApp')
 		var draggingLines = document.getElementById(dragType+"DraggingLines");
 		draggingLines.style.display = "none";
     }
-	
+
 	dragAndDropService.addDragListener("gameArea", handleDragEvent);
-	
+
 	function getAreaSize(type) {
 		var area = document.getElementById(type + "Area");
 		return {width:area.clientWidth, height:area.clientHeight};
 	}
-	
+
 	/*return true if the board square row X col is newly added, used for animation*/
 	$scope.newlyPlaced = function(row, col) {
 		/*for the initial state, there is no newly added square*/
@@ -88,7 +88,7 @@ angular.module('myApp')
 		}
 		return false;
 	}
-	
+
 	function handleDragEvent(type, clientX, clientY) {
 		var gameArea = document.getElementById("gameArea");
 		var boardArea = document.getElementById("boardArea");
@@ -132,7 +132,7 @@ angular.module('myApp')
 			y = shapeY;
 			dragType = 'shape';
 			clearDrag('rotate');
-		} 
+		}
 		// ignore if none of the valid drag
 		if (dragType === '') {
 			clearDrag('board');
@@ -145,9 +145,9 @@ angular.module('myApp')
 		var areaSize = getAreaSize(dragType);
 		var col = Math.floor(num.colsNum * x / areaSize.width);
 		var row = Math.floor(num.rowsNum * y / areaSize.height);
-	
+
 		if (dragType === 'board') {
-			// ignore the drag if the player didn't choose a shape; 
+			// ignore the drag if the player didn't choose a shape;
 			if ($scope.shape === -1) {
 				return;
 			}
@@ -165,10 +165,10 @@ angular.module('myApp')
 				setPlacementBackgroundColor(placement);
 				$scope.preview = placement;
 			}
-			
+
 		}
 
-		// displaying the dragging lines 
+		// displaying the dragging lines
 		var draggingLines = document.getElementById(dragType + "DraggingLines");
 		var horizontalDraggingLine = document.getElementById(dragType + "HorizontalDraggingLine");
 		var verticalDraggingLine = document.getElementById(dragType + "VerticalDraggingLine");
@@ -179,7 +179,7 @@ angular.module('myApp')
 		horizontalDraggingLine.setAttribute("y1", centerXY.y);
 		horizontalDraggingLine.setAttribute("y2", centerXY.y);
 		//var topLeft = getSquareTopLeft(row, col, dragType);
-		
+
 		if (type === "touchend" || type === "touchcancel" || type === "touchleave" || type === "mouseup") {
 			// drag ended
 			dragDone(row, col, dragType);
@@ -189,13 +189,13 @@ angular.module('myApp')
 	function getRowColNum(type) {
 		if (type === 'board') {
 			return {rowsNum: 20, colsNum: 20};
-		} 
+		}
 		if (type === 'shape') {
 			return {rowsNum: 12, colsNum: 20};
-		} 
+		}
 		if (type === 'rotate') {
 			return {rowsNum: 12, colsNum: 20};
-		} 
+		}
 	}
 	function getSquareWidthHeight(type) {
 		var size = getAreaSize(type);
@@ -233,9 +233,9 @@ angular.module('myApp')
 			}
         });
     }
-	
+
 	//window.e2e_test_stateService = stateService; //to allow us to load any state in our e2e tests.
-	
+
 	// Before getting any updateUI, we initialize $scope variables (such as board)
     // and show an empty board to a viewer (so you can't perform moves).
     // updateUI({stateAfterMove: {}, turnIndexAfterMove: 0, yourPlayerIndex: -2}); this is a fake call;
@@ -268,7 +268,7 @@ angular.module('myApp')
 			params.yourPlayerIndex === params.turnIndexAfterMove; // it's my turn
 		$scope.turnIndex = params.turnIndexAfterMove;
 		$scope.internalTurnIndex = gameLogic.getInternalTurnIndex();	// initialize internal turn index
-		// Is it the computer's turn?	
+		// Is it the computer's turn?
 		if ($scope.isYourTurn &&
 			params.playersInfo[params.yourPlayerIndex].playerId === '') {
 			$scope.isYourTurn = false; // to make sure the UI won't send another move.
@@ -477,7 +477,7 @@ angular.module('myApp')
 		if($scope.shape === 13) {
 			if(row===1&&col>=1&&col<=3 || row===0&&col===3 || row===2&&col===1) {
 				rotate = 0;
-			} 
+			}
 			if(row>=0&&row<=2&&col===7 || row===0&&col===6 || row===2&&col===8) {
 				rotate = 1;
 			}
@@ -497,7 +497,7 @@ angular.module('myApp')
 			}
 			if(row===0&&col>=11&&col<=13 || row===1&&col===12) {
 				rotate = 2;
-			} 
+			}
 			if(row>=0&&row<=2&&col===18 || row===1&&col===17) {
 				rotate = 3;
 			}
@@ -615,14 +615,14 @@ angular.module('myApp')
 		}
 		return rotate;
 	}
-	
+
 	$scope.rotateAreaCellClicked = function(row, col) {
 		var rotate = $scope.getRotate(row,col);
 		if (rotate >= 0) {
 			$scope.rotate = rotate; // if the player clicks on a legal rotation, store the rotation in $scope.rotate
 		}
 	}
-		
+
 	$scope.boardAreaCellClicked = function (row, col) {
 		$log.info(["Clicked on cell:", row, col]);
 		if (window.location.search === '?throwException') { // to test encoding a stack trace with sourcemap
@@ -678,7 +678,7 @@ angular.module('myApp')
 	$scope.getShape = function(row, col) {
       if (row === 0 && col === 4) {
         return 0;
-      } 
+      }
       if (col === 0 && (row === 3 || row === 4)) {
         return 1;
       }
@@ -741,5 +741,5 @@ angular.module('myApp')
       }
       return -1;
     };
-	
+
   }]);

@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   <!-- build:js http://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 
   <!-- /build -->
   <!-- For the game rules/instructions, I use carousel from Angular UI + Bootstrap -->
@@ -26,8 +26,8 @@
   <!-- /build -->
 
   <!-- build:js dist/everything.min.js -->
-  <script crossorigin="anonymous" src="src/gameLogic.js"></script>
-  <script crossorigin="anonymous" src="src/game.js"></script>
+  <script src="src/gameLogic.js"></script>
+  <script src="src/game.js"></script>
   <!-- /build -->
 
   <script>window.angularTranslationLanguages = ['en','zh'];</script>
@@ -53,7 +53,7 @@
                 <button type="button" class="close" ng-click="isHelpModalShown = false" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">
-                    {{ 'RULES_OF_BLOKUS' }}
+                    {{ 'RULES_OF_BLOKUS'   }}
                 </h4>
             </div>
             <div class="modal-body">
@@ -62,7 +62,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE1' }}
+                                    {{ 'RULES_SLIDE1'   }}
                                 </td>
                             </tr>
                         </table>
@@ -71,7 +71,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE2' }}
+                                    {{ 'RULES_SLIDE2'   }}
                                 </td>
                             </tr>
                         </table>
@@ -80,7 +80,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE3' }}
+                                    {{ 'RULES_SLIDE3'   }}
                                 </td>
                             </tr>
                         </table>
@@ -89,7 +89,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE4' }}
+                                    {{ 'RULES_SLIDE4'   }}
                                 </td>
                             </tr>
                         </table>
@@ -98,7 +98,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE5' }}
+                                    {{ 'RULES_SLIDE5'    }}
                                 </td>
                             </tr>
                         </table>
@@ -107,7 +107,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE6' | }}
+                                    {{ 'RULES_SLIDE6'    }}
                                 </td>
                                 <td>
 
@@ -119,7 +119,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" ng-click="isHelpModalShown = false">
-                    {{ 'CLOSE' }}
+                    {{ 'CLOSE'   }}
                 </button>
             </div>
         </div>
