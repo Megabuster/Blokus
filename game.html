@@ -31,8 +31,8 @@
   <!-- /build -->
 
   <script>window.angularTranslationLanguages = ['en','zh'];</script>
-  <!-- build:js http://yoav-zibin.github.io/emulator/dist/turnBasedServices.2.min.js -->
-  <script crossorigin="anonymous" src="http://yoav-zibin.github.io/emulator/dist/turnBasedServices.2.js"></script>
+  <!-- build:js http://yoav-zibin.github.io/emulator/dist/turnBasedServices.3.min.js -->
+  <script crossorigin="anonymous" src="http://yoav-zibin.github.io/emulator/dist/turnBasedServices.3.js"></script>
   <!-- /build -->
 
   <link rel="stylesheet" type="text/css" href="http://yoav-zibin.github.io/emulator/main.css">
@@ -53,7 +53,7 @@
                 <button type="button" class="close" ng-click="isHelpModalShown = false" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">
-                    {{ 'RULES_OF_BLOKUS' | translate }}
+                    {{ 'RULES_OF_BLOKUS' }}
                 </h4>
             </div>
             <div class="modal-body">
@@ -62,7 +62,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE1' | translate }}
+                                    {{ 'RULES_SLIDE1' }}
                                 </td>
                             </tr>
                         </table>
@@ -71,7 +71,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE2' | translate }}
+                                    {{ 'RULES_SLIDE2' }}
                                 </td>
                             </tr>
                         </table>
@@ -80,7 +80,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE3' | translate }}
+                                    {{ 'RULES_SLIDE3' }}
                                 </td>
                             </tr>
                         </table>
@@ -89,7 +89,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE4' | translate }}
+                                    {{ 'RULES_SLIDE4' }}
                                 </td>
                             </tr>
                         </table>
@@ -98,7 +98,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE5' | translate }}
+                                    {{ 'RULES_SLIDE5' }}
                                 </td>
                             </tr>
                         </table>
@@ -107,10 +107,10 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE6' | translate }}
+                                    {{ 'RULES_SLIDE6' | }}
                                 </td>
                                 <td>
-                                    
+
                                 </td>
                             </tr>
                         </table>
@@ -119,7 +119,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" ng-click="isHelpModalShown = false">
-                    {{ 'CLOSE' | translate }}
+                    {{ 'CLOSE' }}
                 </button>
             </div>
         </div>
@@ -160,7 +160,7 @@
 					style="position:absolute; top:0; left:{{col * 5}}%; width:5%; height:100%;"
 					ng-class = "{l:col===0,t:row===0,r:col===19,b:row===11,blink:shape>=0&&getShape(row, col)===shape}"
 					id="{{'e2e_test_shape_div_' + row + 'x' + col}}"
-					
+
 					ng-style="getShapeCellColorStyle(row, col)">
 				</div>
 		</div>
@@ -186,7 +186,7 @@
 					style = "position:absolute;top:0;left:{{col*5}}%;width:5%; height:100%;"
 					ng-class = "{l:col===0,t:row===0,r:col===19,b:row===11,blink:shape>=0&&rotate!=-1&&getRotate(row, col)===rotate}"
 					ng-style = "getRotateAreaSquareColor(row, col)"
-					
+
 					id="{{'e2e_test_rotate_div_' + row + 'x' + col}}">
 				</div>
 		</div>

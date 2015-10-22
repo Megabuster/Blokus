@@ -17,7 +17,7 @@
   <script src="dist/everything.min.js"></script>
 
   <script>window.angularTranslationLanguages = ['en','zh'];</script>
-  <script src="http://yoav-zibin.github.io/emulator/dist/turnBasedServices.2.min.js"></script>
+  <script src="http://yoav-zibin.github.io/emulator/dist/turnBasedServices.3.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="http://yoav-zibin.github.io/emulator/main.css">
   <link rel="stylesheet" type="text/css" href="game.css">
@@ -94,7 +94,7 @@
                                     {{ 'RULES_SLIDE6' | translate }}
                                 </td>
                                 <td>
-                                    
+
                                 </td>
                             </tr>
                         </table>
@@ -144,7 +144,7 @@
 					style="position:absolute; top:0; left:{{col * 5}}%; width:5%; height:100%;"
 					ng-class = "{l:col===0,t:row===0,r:col===19,b:row===11,blink:shape>=0&&getShape(row, col)===shape}"
 					id="{{'e2e_test_shape_div_' + row + 'x' + col}}"
-					
+
 					ng-style="getShapeCellColorStyle(row, col)">
 				</div>
 		</div>
@@ -170,7 +170,7 @@
 					style = "position:absolute;top:0;left:{{col*5}}%;width:5%; height:100%;"
 					ng-class = "{l:col===0,t:row===0,r:col===19,b:row===11,blink:shape>=0&&rotate!=-1&&getRotate(row, col)===rotate}"
 					ng-style = "getRotateAreaSquareColor(row, col)"
-					
+
 					id="{{'e2e_test_rotate_div_' + row + 'x' + col}}">
 				</div>
 		</div>
