@@ -1,8 +1,8 @@
 angular.module('myApp')
   .controller('Ctrl',
-      ['$scope', '$rootScope', '$log', '$timeout',
+      ['$scope', '$log', '$timeout',
         'gameLogic',
-		function ($scope,$rootScope, $log, $timeout,
+		function ($scope, $log, $timeout,
 		gameLogic) {
 
     'use strict';

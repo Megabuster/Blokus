@@ -22,7 +22,7 @@ module.exports = function(grunt) {
       },
     dist: {
         // Order is important! gameLogic.js must be first because it defines myApp angular module.
-        src: ['src/gameLogic.js', 'src/game.js', 'src/aiService.js'],
+        src: ['ts_output_readonly_do_NOT_change_manually/src/gameLogic.js', 'src/game.js', 'src/aiService.js'],
         dest: 'dist/everything.js',
       },
              },
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
         runInBackground: true
     }
 },
-protractor: {
+/*protractor: {
   options: {
     configFile: "protractor.conf.js", // Default config file
     keepAlive: true, // If false, the grunt process stops when the test fails.
@@ -92,23 +92,29 @@ protractor: {
     }
   },
   all: {}
-},
+},*/
 });
 
 
-
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-processhtml');
-  grunt.loadNpmTasks('grunt-manifest');
+grunt.loadNpmTasks('grunt-contrib-watch');
+   grunt.loadNpmTasks('grunt-karma');
+   grunt.loadNpmTasks('grunt-contrib-concat');
+   grunt.loadNpmTasks('grunt-contrib-uglify');
+   grunt.loadNpmTasks('grunt-processhtml');
+   grunt.loadNpmTasks('grunt-manifest');
+   grunt.loadNpmTasks('grunt-http-server');
+  //grunt.loadNpmTasks('grunt-contrib-concat');
+//  grunt.loadNpmTasks('grunt-contrib-uglify');
+//  grunt.loadNpmTasks('grunt-processhtml');
+  //grunt.loadNpmTasks('grunt-manifest');
 //  grunt.loadNpmTasks('grunt-http-server');
-//  grunt.loadNpmTasks('grunt-protractor-runner');
+  //grunt.loadNpmTasks('grunt-protractor-runner');
 
   // Default task(s).
-  grunt.registerTask('default', [ 
+  grunt.registerTask('default', [
       'concat', 'uglify',
       'processhtml', 'manifest',
-      'http-server', 'protractor'
+      'http-server'//, 'protractor'
       ]);
 
 };
