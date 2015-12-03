@@ -884,22 +884,22 @@ var gameLogic;
     }
     gameLogic.getInternalTurnIndex = getInternalTurnIndex;
 })(gameLogic || (gameLogic = {}));
-angular.module('myApp', ['ngTouch', 'ui.bootstrap', 'gameServices'])
-    .factory('gameLogic', function () {
-    return {
-        getScore: gameLogic.getScore,
-        endOfMatch: gameLogic.endOfMatch,
-        getInitialBoard: gameLogic.getInitialBoard,
-        getInitialFreeShapes: gameLogic.getInitialFreeShapes,
-        getInitialPlayerStatus: gameLogic.getInitialPlayerStatus,
-        createMove: gameLogic.createMove,
-        isMoveOk: gameLogic.isMoveOk,
-        legalPlacement: gameLogic.legalPlacement,
-        getPlacement: gameLogic.getPlacement,
-        getPossibleMoves: gameLogic.getPossibleMoves,
-        isOccupied: gameLogic.isOccupied,
-        placementInBound: gameLogic.placementInBound,
-        getPossibleMovesWithSqaureN: gameLogic.getPossibleMovesWithSqaureN,
-        getInternalTurnIndex: gameLogic.getInternalTurnIndex
-    };
-});
+/*angular.module('myApp', [ 'ngTouch', 'ui.bootstrap','gameServices'])
+    .factory('gameLogic', function() {
+     return {
+         getScore: gameLogic.getScore,
+      endOfMatch: gameLogic.endOfMatch,
+         getInitialBoard: gameLogic.getInitialBoard,
+      getInitialFreeShapes: gameLogic.getInitialFreeShapes,
+      getInitialPlayerStatus: gameLogic.getInitialPlayerStatus,
+         createMove: gameLogic.createMove,
+         isMoveOk: gameLogic.isMoveOk,
+         legalPlacement: gameLogic.legalPlacement,
+      getPlacement: gameLogic.getPlacement,
+         getPossibleMoves: gameLogic.getPossibleMoves,
+      isOccupied: gameLogic.isOccupied,
+      placementInBound: gameLogic.placementInBound,
+      getPossibleMovesWithSqaureN: gameLogic.getPossibleMovesWithSqaureN,
+      getInternalTurnIndex : gameLogic.getInternalTurnIndex
+     };
+});*/
