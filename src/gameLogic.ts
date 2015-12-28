@@ -901,7 +901,7 @@ export function getPlacement(row: number, col: number, shape: number, r: number)
 		return nextPlayer;
 	}
 }
-  /*angular.module('myApp', [ 'ngTouch', 'ui.bootstrap','gameServices'])
+  angular.module('myApp', [ 'ngTouch', 'ui.bootstrap','gameServices'])
       .factory('gameLogic', function() {
        return {
            getScore: gameLogic.getScore,
@@ -919,4 +919,4 @@ export function getPlacement(row: number, col: number, shape: number, r: number)
         getPossibleMovesWithSqaureN: gameLogic.getPossibleMovesWithSqaureN,
         getInternalTurnIndex : gameLogic.getInternalTurnIndex
        };
-  });*/
+  });

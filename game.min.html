@@ -46,7 +46,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE1' | translate  }}
+                                    {{ 'RULES_SLIDE1'   }}
                                 </td>
                             </tr>
                         </table>
@@ -55,7 +55,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE2'  | translate }}
+                                    {{ 'RULES_SLIDE2'   }}
                                 </td>
                             </tr>
                         </table>
@@ -64,7 +64,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE3' | translate  }}
+                                    {{ 'RULES_SLIDE3'   }}
                                 </td>
                             </tr>
                         </table>
@@ -73,7 +73,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE4' | translate  }}
+                                    {{ 'RULES_SLIDE4'   }}
                                 </td>
                             </tr>
                         </table>
@@ -82,7 +82,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE5' | translate   }}
+                                    {{ 'RULES_SLIDE5'    }}
                                 </td>
                             </tr>
                         </table>
@@ -91,7 +91,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    {{ 'RULES_SLIDE6' | translate   }}
+                                    {{ 'RULES_SLIDE6'    }}
                                 </td>
                                 <td>
 
@@ -103,7 +103,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" ng-click="isHelpModalShown = false">
-                    {{ 'CLOSE' | translate  }}
+                    {{ 'CLOSE'   }}
                 </button>
             </div>
         </div>
@@ -117,8 +117,8 @@
 			style="position:absolute; top:{{row * 5}}%; left:0; width:100%; height:5%;">
 			<div ng-repeat="col in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]"
 				style="position:absolute; top:0; left:{{col * 5}}%; width:5%; height:100%;"
-				ng-class = "{l: true, t: true, r: col === 19, b: row === 19, blink:game.newlyPlaced(row, col)}"
-				ng-style = "game.setBoardAreaSquareStyle(row, col)"
+				ng-class = "{l: true, t: true, r: col === 19, b: row === 19, blink:newlyPlaced(row, col)}"
+				ng-style = "setBoardAreaSquareStyle(row, col)"
 				id="{{'e2e_test_board_div_' + row + 'x' + col}}">
 			</div>
 		</div>
@@ -137,15 +137,15 @@
 		</svg>
 	</div>
 	<!-- shapeArea-->
-	<div id="shapeArea" style="position:absolute;top:63%;left:0;width:100%;height:36%" ng-show="game.shape===-1|| game.shape>=0 && game.rotate>=0">
+	<div id="shapeArea" style="position:absolute;top:63%;left:0;width:100%;height:36%" ng-show="shape===-1|| shape>=0 && rotate>=0">
 	    <div ng-repeat="row in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]"
 			style="position:absolute; top:{{row * 8.333}}%; left: 0; width:100%; height:8.333%;">
 				<div ng-repeat="col in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]"
 					style="position:absolute; top:0; left:{{col * 5}}%; width:5%; height:100%;"
-					ng-class = "{l:game.col===0,t:game.row===0,r:game.col===19,b:game.row===11,blink:game.shape>=0&&game.getShape(row, col)===shape}"
+					ng-class = "{l:col===0,t:row===0,r:col===19,b:row===11,blink:shape>=0&&getShape(row, col)===shape}"
 					id="{{'e2e_test_shape_div_' + row + 'x' + col}}"
 
-					ng-style="game.getShapeCellColorStyle(row, col)">
+					ng-style="getShapeCellColorStyle(row, col)">
 				</div>
 		</div>
 		<svg id="shapeDraggingLines" width="100%" height="100%"
@@ -163,13 +163,13 @@
 		</svg>
 	</div>
 	<!--rotateArea-->
-	<div id="rotateArea" style="position:absolute;top:63%;left:0;width:100%;height:36%" ng-show="game.shape>=0&&game.rotate===-1">
+	<div id="rotateArea" style="position:absolute;top:63%;left:0;width:100%;height:36%" ng-show="shape>=0&&rotate===-1">
 		<div id ng-repeat = "row in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]"
 			style = "position:absolute;top:{{row * 8.333}}%; left:0; width:100%; height:8.333%;">
 				<div ng-repeat = "col in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]"
 					style = "position:absolute;top:0;left:{{col*5}}%;width:5%; height:100%;"
-					ng-class = "{l:col===0,t:row===0,r:col===19,b:row===11,blink:game.shape>=0&&rotate!=-1&&game.getRotate(row, col)===game.rotate}"
-					ng-style = "game.getRotateAreaSquareColor(row, col)"
+					ng-class = "{l:col===0,t:row===0,r:col===19,b:row===11,blink:shape>=0&&rotate!=-1&&getRotate(row, col)===rotate}"
+					ng-style = "getRotateAreaSquareColor(row, col)"
 
 					id="{{'e2e_test_rotate_div_' + row + 'x' + col}}">
 				</div>
